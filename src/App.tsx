@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { User } from 'firebase/auth';
+import { Analytics } from '@vercel/analytics/react';
 import { onAuthChange, signOutAuthor } from './lib/firebase';
 import { isOwnerEmail } from './config/auth';
 import { Header } from './components/Header';
@@ -199,6 +200,9 @@ export default function App() {
           onDownloadZip={() => setIsSourceInspectorOpen(true)}
         />
       )}
+
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
