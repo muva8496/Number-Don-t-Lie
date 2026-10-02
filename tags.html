@@ -1,0 +1,47 @@
+---
+layout: default
+title: "Topic Index"
+permalink: /tags/
+---
+
+<div class="reading-container">
+  <header class="trail-header">
+    <span class="section-part-kicker">Catalog &amp; Subject Taxonomy</span>
+    <h1 class="trail-title">Topics on The Trail</h1>
+    <p class="trail-premise">
+      Browse chapters and field notes grouped by methodology, domain, and tooling.
+    </p>
+  </header>
+
+  <!-- Tag Pills as Clean Typographic Badges -->
+  <div style="display: flex; flex-wrap: wrap; gap: 0.85rem; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--gold-border);">
+    {% for tag in site.tags %}
+      <a href="#{{ tag[0] | slugify }}" style="font-family: var(--font-display); font-size: 1.15rem; color: var(--gold-primary); text-decoration: none; border-bottom: 1px dotted var(--gold-muted); padding: 0.2rem 0;">
+        #{{ tag[0] }} <span style="font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">({{ tag[1].size }})</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="tag-groups">
+    {% for tag in site.tags %}
+      <section id="{{ tag[0] | slugify }}" style="margin-bottom: 3.5rem; scroll-margin-top: 5rem;">
+        <h2 style="font-family: var(--font-display); font-size: 1.85rem; color: var(--gold-light); margin-bottom: 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 0.35rem;">
+          #{{ tag[0] }}
+        </h2>
+        
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+          {% for post in tag[1] %}
+            <li style="display: flex; align-items: baseline; gap: 1rem; font-size: 1rem;">
+              <time datetime="{{ post.date | date_to_xmlschema }}" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); white-space: nowrap;">
+                {{ post.date | date: "%Y-%m-%d" }}
+              </time>
+              <a href="{{ post.url | relative_url }}" style="color: var(--text-primary); text-decoration: none; border-bottom: 1px dotted rgba(212, 175, 55, 0.4);">
+                {{ post.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  </div>
+</div>

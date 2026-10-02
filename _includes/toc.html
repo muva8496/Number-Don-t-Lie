@@ -1,0 +1,65 @@
+{% assign sorted_chapters = site.chapters | sort: "order" %}
+<section id="toc" class="toc-section" aria-labelledby="toc-heading">
+  <span class="section-part-kicker">Part I · The Evidence</span>
+  <h2 id="toc-heading" class="section-title">Table of Chapters</h2>
+
+  <ol class="toc-list">
+    {% for chapter in sorted_chapters %}
+      <li class="toc-entry">
+        <div class="toc-header">
+          <div>
+            <span class="toc-numeral">
+              {% case chapter.order %}
+                {% when 1 %}Chapter I
+                {% when 2 %}Chapter II
+                {% when 3 %}Chapter III
+                {% when 4 %}Chapter IV
+                {% when 5 %}Chapter V
+                {% else %}Chapter {{ chapter.order }}
+              {% endcase %}
+            </span>
+            {% if chapter.status == "published" %}
+              <a href="{{ chapter.url | relative_url }}" class="toc-link">{{ chapter.title }}</a>
+            {% else %}
+              <span class="toc-link" style="color: var(--text-secondary); cursor: default;">{{ chapter.title }}</span>
+            {% endif %}
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            {% if chapter.primary_lens %}
+              <span style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid rgba(212,175,55,0.3); padding: 0.15rem 0.4rem; border-radius: 2px;">
+                {{ chapter.primary_lens }}
+              </span>
+            {% endif %}
+            <span class="toc-status {% if chapter.status == 'published' %}published{% endif %}">
+              {% if chapter.status == "published" %}
+                Published
+              {% else %}
+                In Progress
+              {% endif %}
+            </span>
+          </div>
+        </div>
+
+        {% if chapter.dataset %}
+          <span class="toc-dataset">Dataset: {{ chapter.dataset }}</span>
+        {% endif %}
+
+        {% if chapter.summary %}
+          <p class="toc-teaser">{{ chapter.summary }}</p>
+        {% elsif chapter.teaser %}
+          <p class="toc-teaser">{{ chapter.teaser }}</p>
+        {% endif %}
+
+        {% if chapter.tags %}
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; font-size: 0.78rem;">
+            <span style="color: var(--text-muted);">Tagged:</span>
+            {% for tag in chapter.tags %}
+              <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" style="color: var(--gold-primary); text-decoration: none;">#{{ tag }}</a>
+              {% unless forloop.last %}<span style="color: var(--text-muted);" aria-hidden="true">·</span>{% endunless %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</section>

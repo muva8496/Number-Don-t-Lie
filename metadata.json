@@ -1,0 +1,6 @@
+{
+  "name": "NDL: Numbers Don't Lie",
+  "description": "A book-style investigative data portfolio by a Nairobi-based data guy standing at the intersection of analysis, engineering, and science.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

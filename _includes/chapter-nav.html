@@ -1,0 +1,54 @@
+{% assign sorted_chapters = site.chapters | sort: "order" %}
+{% assign prev_chapter = nil %}
+{% assign next_chapter = nil %}
+
+{% for ch in sorted_chapters %}
+  {% if ch.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+    {% assign prev_index = current_index | minus: 1 %}
+    {% assign next_index = current_index | plus: 1 %}
+    {% if prev_index >= 0 %}
+      {% assign prev_chapter = sorted_chapters[prev_index] %}
+    {% endif %}
+    {% if next_index < sorted_chapters.size %}
+      {% assign next_chapter = sorted_chapters[next_index] %}
+    {% endif %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<nav class="chapter-nav-wrapper" aria-label="Chapter Navigation">
+  <div>
+    {% if prev_chapter %}
+      <a href="{{ prev_chapter.url | relative_url }}" class="chapter-nav-link prev" rel="prev">
+        <span class="nav-direction">&larr; Previous Chapter</span>
+        <span class="nav-chapter-title">
+          {% case prev_chapter.order %}
+            {% when 1 %}Chapter I: 
+            {% when 2 %}Chapter II: 
+            {% when 3 %}Chapter III: 
+            {% else %}Chapter {{ prev_chapter.order }}: 
+          {% endcase %}
+          {{ prev_chapter.title }}
+        </span>
+      </a>
+    {% endif %}
+  </div>
+
+  <div>
+    {% if next_chapter %}
+      <a href="{{ next_chapter.url | relative_url }}" class="chapter-nav-link next" rel="next">
+        <span class="nav-direction">Next Chapter &rarr;</span>
+        <span class="nav-chapter-title">
+          {% case next_chapter.order %}
+            {% when 1 %}Chapter I: 
+            {% when 2 %}Chapter II: 
+            {% when 3 %}Chapter III: 
+            {% else %}Chapter {{ next_chapter.order }}: 
+          {% endcase %}
+          {{ next_chapter.title }}
+        </span>
+      </a>
+    {% endif %}
+  </div>
+</nav>

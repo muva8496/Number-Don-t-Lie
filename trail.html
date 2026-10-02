@@ -1,0 +1,61 @@
+---
+layout: default
+title: "The Trail"
+subtitle: "Short field notes, analytical dilemmas, and dispatches from the data desk."
+permalink: /trail/
+---
+
+<div class="reading-container">
+  <header class="trail-header">
+    <span class="section-part-kicker">Part II · Chronological Dispatch</span>
+    <h1 class="trail-title">The Trail</h1>
+    <p class="trail-premise">
+      Between deep dive chapters lies <em>The Trail</em>—a notebook of short, date-stamped reflections on statistical intuition, dataset idiosyncrasies, and what happens when clean theoretical models collide with Nairobi's real-world economy.
+    </p>
+  </header>
+
+  <ul class="trail-posts-list">
+    {% for post in site.posts %}
+      <li class="trail-post-card">
+        <div class="trail-post-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%B %d, %Y" }}
+          </time>
+          <span aria-hidden="true">·</span>
+          <span>
+            {% assign words = post.content | number_of_words %}
+            {% if words < 360 %}
+              1 min read
+            {% else %}
+              {{ words | divided_by: 180 }} min read
+            {% endif %}
+          </span>
+        </div>
+
+        <h2 class="trail-post-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+
+        <div class="trail-post-excerpt">
+          {{ post.excerpt | strip_html | truncatewords: 45 }}
+        </div>
+
+        <div class="trail-tags">
+          <span style="color: var(--text-muted);">Filed under:</span>
+          {% for tag in post.tags %}
+            <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="trail-tag-link">#{{ tag }}</a>
+            {% unless forloop.last %}<span style="color: var(--text-muted);" aria-hidden="true">·</span>{% endunless %}
+          {% endfor %}
+        </div>
+      </li>
+    {% else %}
+      <p style="color: var(--text-secondary); font-style: italic;">No field notes recorded yet.</p>
+    {% endfor %}
+  </ul>
+
+  <div style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--gold-border); padding-top: 2rem;">
+    <a href="{{ '/feed.xml' | relative_url }}" class="btn-book-toc">
+      Subscribe via RSS Feed
+    </a>
+  </div>
+</div>

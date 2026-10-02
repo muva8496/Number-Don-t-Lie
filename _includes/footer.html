@@ -1,0 +1,30 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <p class="footer-colophon-text">"Spreadsheets are human ledgers. When you torture the data, it confesses to anything."</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+          Written &amp; curated by {{ site.author.name }} · {{ site.author.location }} · {{ site.author.tagline }}
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="{{ '/#toc' | relative_url }}" class="footer-link">Table of Contents</a>
+        <a href="{{ '/trail/' | relative_url }}" class="footer-link">The Trail</a>
+        <a href="{{ '/dashboards/' | relative_url }}" class="footer-link">Dashboard Room</a>
+        <a href="{{ '/toolkit/' | relative_url }}" class="footer-link">Toolkit</a>
+        <a href="{{ '/about/' | relative_url }}" class="footer-link">About</a>
+        <a href="{{ '/work-with-me/' | relative_url }}" class="footer-link">Work with Me</a>
+        <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">RSS Feed</a>
+        <a href="{{ site.author.github }}" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        &copy; {{ 'now' | date: "%Y" }} {{ site.title }}. Open-source investigations. The name is a promise.
+      </div>
+      <div>
+        Built with Jekyll &amp; GitHub Pages · No custom plugins outside allowlist
+      </div>
+    </div>
+  </div>
+</footer>

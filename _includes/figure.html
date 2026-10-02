@@ -1,0 +1,17 @@
+{% assign fig_src = include.src | relative_url %}
+<figure class="book-figure">
+  <div class="book-figure-img-wrap">
+    <img src="{{ fig_src }}" alt="{{ include.alt | escape }}" loading="lazy" />
+  </div>
+  <figcaption class="book-figcaption">
+    {% if include.caption %}
+      <p class="figure-caption-text">{{ include.caption }}</p>
+    {% endif %}
+    {% if include.takeaway %}
+      <div class="figure-takeaway">
+        <span class="takeaway-label">Key takeaway:</span>
+        <span>{{ include.takeaway }}</span>
+      </div>
+    {% endif %}
+  </figcaption>
+</figure>

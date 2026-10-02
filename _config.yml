@@ -1,0 +1,76 @@
+# Site Settings
+title: "NDL: Numbers Don't Lie"
+tagline: "A Book of Data Work"
+email: "mosesmukangai75@gmail.com"
+description: >-
+  A book-style investigative portfolio by a Nairobi-based data guy standing at
+  the intersection of analysis, engineering, and science. Each project is an
+  inquiry chapter; each trail entry is a field note from the craft.
+baseurl: ""
+url: "https://muva8496.github.io"
+author:
+  name: "Moses Mukangai"
+  role: "Data Guy"
+  location: "Nairobi, Kenya"
+  tagline: "Data guy at the intersection of analysis, engineering and science."
+  github: "https://github.com/Muva8496"
+  rss: "/feed.xml"
+
+# Permalinks
+permalink: /trail/:year/:month/:day/:title/
+
+# Collections
+collections:
+  chapters:
+    output: true
+    permalink: /chapters/:name/
+    sort_by: order
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Build Settings & GitHub Pages Plugins (strictly within GitHub Pages allowlist)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Markdown Processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  toc_levels: 2..3
+  smart_quotes: ["lsquo", "rsquo", "ldquo", "rdquo"]
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - package.json
+  - package-lock.json
+  - bun.lock
+  - tsconfig.json
+  - vite.config.ts
+  - src
+  - .git
+  - .gitignore
+  - metadata.json

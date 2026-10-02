@@ -1,0 +1,18 @@
+{% assign callout_title = include.title | default: "The Verdict" %}
+<aside class="book-callout" aria-label="{{ callout_title }}">
+  <div class="callout-header">
+    <span class="callout-title">{{ callout_title }}</span>
+    {% if include.tagline %}
+      <span class="callout-tagline">{{ include.tagline }}</span>
+    {% endif %}
+  </div>
+  {% if include.content %}
+    <div class="callout-body">
+      {{ include.content | markdownify }}
+    </div>
+  {% else %}
+    <div class="callout-body">
+      {{ content }}
+    </div>
+  {% endif %}
+</aside>

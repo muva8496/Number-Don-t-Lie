@@ -1,0 +1,100 @@
+---
+layout: default
+---
+
+<article class="reading-container" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="trail-header">
+    <div style="margin-bottom: 0.75rem;">
+      <a href="{{ '/trail/' | relative_url }}" style="color: var(--gold-primary); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase;">
+        &larr; The Trail Archive
+      </a>
+    </div>
+
+    <h1 class="trail-title" itemprop="headline" style="font-size: 2.6rem; line-height: 1.2;">
+      {{ page.title }}
+    </h1>
+
+    <div class="trail-post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %d, %Y" }}
+      </time>
+      <span aria-hidden="true">·</span>
+      <span>
+        {% assign words = content | number_of_words %}
+        {% if words < 360 %}
+          1 min read
+        {% else %}
+          {{ words | divided_by: 180 }} min read
+        {% endif %}
+      </span>
+      <span aria-hidden="true">·</span>
+      <span>By {{ site.author.name }}</span>
+    </div>
+
+    {% if page.tags %}
+      <div class="trail-tags" style="margin-top: 0.75rem;">
+        <span style="color: var(--text-muted);">Tagged:</span>
+        {% for tag in page.tags %}
+          <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}" class="trail-tag-link">#{{ tag }}</a>
+          {% unless forloop.last %}<span style="color: var(--text-muted);" aria-hidden="true">·</span>{% endunless %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  <div class="chapter-content drop-cap-p" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <!-- Related Chapters Section if tags match -->
+  {% if page.tags %}
+    {% assign related_chapters = "" | split: "" %}
+    {% for ch in site.chapters %}
+      {% assign ch_match = false %}
+      {% for tag in page.tags %}
+        {% if ch.tags contains tag %}
+          {% assign ch_match = true %}
+        {% endif %}
+      {% endfor %}
+      {% if ch_match %}
+        {% assign related_chapters = related_chapters | push: ch %}
+      {% endif %}
+    {% endfor %}
+
+    {% if related_chapters.size > 0 %}
+      <div class="related-trail-box" style="margin-top: 4rem;">
+        <h3 class="related-trail-heading">Evidence Chapters Connected to this Field Note</h3>
+        <ul class="related-trail-list">
+          {% for ch in related_chapters %}
+            <li class="related-trail-item">
+              <span style="color: var(--gold-primary); font-family: var(--font-display); margin-right: 0.4rem;">
+                Chapter {{ ch.order }}:
+              </span>
+              <a href="{{ ch.url | relative_url }}">{{ ch.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <!-- Post Nav -->
+  <nav class="chapter-nav-wrapper" style="margin-top: 3.5rem;">
+    <div>
+      {% if page.previous %}
+        <a href="{{ page.previous.url | relative_url }}" class="chapter-nav-link prev">
+          <span class="nav-direction">&larr; Older Note</span>
+          <span class="nav-chapter-title">{{ page.previous.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div>
+      {% if page.next %}
+        <a href="{{ page.next.url | relative_url }}" class="chapter-nav-link next">
+          <span class="nav-direction">Newer Note &rarr;</span>
+          <span class="nav-chapter-title">{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

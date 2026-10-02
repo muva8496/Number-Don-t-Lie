@@ -1,0 +1,28 @@
+{
+  "entities": {
+    "admin": {
+      "title": "Admin",
+      "description": "Admin configuration and verified author records",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Owner email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "User role"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": {
+        "$ref": "#/entities/admin"
+      },
+      "description": "Collection of verified application administrators"
+    }
+  }
+}
